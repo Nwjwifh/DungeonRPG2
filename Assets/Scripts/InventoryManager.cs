@@ -2,48 +2,56 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject InventoryMenu;
-    private bool menuActivated;
+    public GameObject inventoryMenu;
+    private bool isMenuActive;
 
-    [SerializeField] private ItemSlot[] itemSlot;
+    [SerializeField] private ItemSlot[] itemSlots;
 
-    void Start()
+    public static InventoryManager instance;
+
+    private void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I) && menuActivated)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            InventoryMenu.SetActive(false);
-            menuActivated = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.I) && !menuActivated)
-        {
-            InventoryMenu.SetActive(true);
-            menuActivated = true;
+            ToggleInventoryMenu(!isMenuActive);
         }
     }
 
-    public void AddItem(string itemName, Sprite itemSprite, string itemDescription)
+    public void AddItemToInventory(string itemName, Sprite itemSprite, string itemDescription)
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            if (itemSlot[i].isFull == false)
+            if (itemSlots[i].isFull == false)
             {
-                itemSlot[i].AddItem(itemName, itemSprite, itemDescription);
+                itemSlots[i].AddItem(itemName, itemSprite, itemDescription);
                 return;
             }
         }
     }
 
-    public void DeselectSlots()
+    public void DeselectAllItemSlots()
     {
-        for (int i = 0; i < itemSlot.Length; i++)
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            itemSlot[i].selectedSlot.SetActive(false);
-            itemSlot[i].itemSelected = false;
+            itemSlots[i].DeselectSlot();
         }
+    }
+
+    private void ToggleInventoryMenu(bool showMenu)
+    {
+        inventoryMenu.SetActive(showMenu);
+        isMenuActive = showMenu;
     }
 }
