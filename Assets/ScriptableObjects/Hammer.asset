@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   itemName: Hammer
-  itemDescription: Very Heavy
+  itemDescription: Very Heavy (ATK +20)
   itemType: 0
-  itemDamage: 180
+  itemDamage: 20
   itemArmor: 0
   itemImage: {fileID: 21300000, guid: de0ab604dfa917546ae7094841cb900c, type: 3}

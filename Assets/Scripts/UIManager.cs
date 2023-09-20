@@ -1,29 +1,38 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject statusPanel;
-    public GameObject inventoryPanel;
+    [SerializeField] private List<Button> buttons;
+    [SerializeField] private List<GameObject> panels;
 
-    public Button statusButton;
-    public Button inventoryButton;
+    private Dictionary<Button, GameObject> buttonToPanel = new Dictionary<Button, GameObject>();
 
     private void Start()
     {
-        statusButton.onClick.AddListener(ShowStatusPanel);
-        inventoryButton.onClick.AddListener(ShowInventoryPanel);
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            Button button = buttons[i];
+            GameObject panel = panels[i];
+
+            buttonToPanel.Add(button, panel);
+
+            panel.SetActive(false);
+            button.onClick.AddListener(() => OnButtonClick(button));
+        }
+
+        OnButtonClick(buttons[0]);
     }
 
-    void ShowStatusPanel()
+    private void OnButtonClick(Button clickedButton)
     {
-        statusPanel.SetActive(true);
-        inventoryPanel.SetActive(false);
-    }
+        foreach (var pair in buttonToPanel)
+        {
+            Button button = pair.Key;
+            GameObject panel = pair.Value;
 
-    void ShowInventoryPanel()
-    {
-        statusPanel.SetActive(false);
-        inventoryPanel.SetActive(true);
+            panel.SetActive(button == clickedButton);
+        }
     }
 }

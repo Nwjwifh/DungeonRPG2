@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: Player
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSO
-  playerName: fff
-  level: 1
-  gold: 1
-  atk: 100
+  playerName: JJJ
+  level: 3
+  gold: 999
+  atk: 51
   def: 1
-  maxHP: 1
-  maxMP: 1
-  maxSP: 1
-  luk: 1
+  maxHP: 10
+  maxMP: 10
+  maxSP: 10
+  luk: 0
