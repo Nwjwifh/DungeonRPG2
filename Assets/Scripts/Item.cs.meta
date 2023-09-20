@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/ItemSlot.cs.meta
+guid: 07ef95279e532ab47ba69b222957036c
+========
+guid: aa97d3b1b87abd54d8908d318915c8b4
+>>>>>>>> ADD_Status:Assets/Scripts/Item.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
