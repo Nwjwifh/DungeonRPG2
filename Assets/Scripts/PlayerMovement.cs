@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
-
+    public float jumpForce = 7f;
+    private bool isGrounded;
     private Rigidbody2D rb;
 
     private void Start()
@@ -14,9 +15,21 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        Vector2 movement = new Vector2(horizontalInput, 0f);
+        rb.velocity = new Vector2(movement.x * moveSpeed, rb.velocity.y);
 
-        Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized;
-        rb.velocity = movement * moveSpeed;
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isGrounded = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject inventoryMenu;
+    public GameObject menu;
     private bool isMenuActive;
 
     [SerializeField] private ItemSlot[] itemSlots;
@@ -25,33 +25,25 @@ public class InventoryManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ToggleInventoryMenu(!isMenuActive);
+            ToggleMenu(!isMenuActive);
         }
     }
 
-    public void AddItemToInventory(string itemName, Sprite itemSprite, string itemDescription)
+    public void AddItemToInventory(ItemSO itemData)
     {
         for (int i = 0; i < itemSlots.Length; i++)
         {
             if (itemSlots[i].isFull == false)
             {
-                itemSlots[i].AddItem(itemName, itemSprite, itemDescription);
+                itemSlots[i].AddItem(itemData);
                 return;
             }
         }
     }
 
-    public void DeselectAllItemSlots()
+    private void ToggleMenu(bool showMenu)
     {
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            itemSlots[i].DeselectSlot();
-        }
-    }
-
-    private void ToggleInventoryMenu(bool showMenu)
-    {
-        inventoryMenu.SetActive(showMenu);
+        menu.SetActive(showMenu);
         isMenuActive = showMenu;
     }
 }

@@ -14,8 +14,8 @@ public class PlayerStatsUI : MonoBehaviour
     public TMP_Text playerLuckText;
 
     public PlayerSO playerData;
-
-    private void Start()
+    
+    private void Update()
     {
         UpdatePlayerStatsUI();
     }

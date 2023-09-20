@@ -5,45 +5,63 @@ using TMPro;
 
 public class ItemSlot : MonoBehaviour, IPointerClickHandler
 {
-    private string itemName;
-    private Sprite itemSprite;
-    private string itemDescription;
+    private ItemSO itemData;
     public bool isFull;
+    private bool isEquipped = false;
 
     [SerializeField] private Image itemImage;
     [SerializeField] private GameObject selectedSlot;
+    [SerializeField] private GameObject equippedImage;
     [SerializeField] private bool isSelected;
 
     [SerializeField] private Image itemDescriptionImage;
     [SerializeField] private TMP_Text itemDescriptionNameText;
     [SerializeField] private TMP_Text itemDescriptionText;
 
-    public void AddItem(string itemName, Sprite itemSprite, string itemDescription)
+    public void AddItem(ItemSO itemData)
     {
-        this.itemName = itemName;
-        this.itemSprite = itemSprite;
-        this.itemDescription = itemDescription;
+        this.itemData = itemData;
+        isEquipped = false;
         isFull = true;
 
-        itemImage.sprite = itemSprite;
+        itemImage.sprite = itemData.itemImage;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            InventoryManager.instance.DeselectAllItemSlots();
-            selectedSlot.SetActive(true);
-            isSelected = true;
-            itemDescriptionNameText.text = itemName;
-            itemDescriptionText.text = itemDescription;
-            itemDescriptionImage.sprite = itemSprite;
+            if (itemData != null)
+            {
+                selectedSlot.SetActive(true);
+                isSelected = true;
+                itemDescriptionNameText.text = itemData.itemName;
+                itemDescriptionText.text = itemData.itemDescription;
+                itemDescriptionImage.sprite = itemData.itemImage;
+            }
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (itemData != null)
+            {
+                ToggleItemEquip();
+            }
         }
     }
 
-    public void DeselectSlot()
+    public void ToggleItemEquip()
     {
-        selectedSlot.SetActive(false);
-        isSelected = false;
+        isEquipped = !isEquipped;
+
+        if (isEquipped)
+        {
+            PlayerStatsController.instance.EquipItem(itemData);
+            equippedImage.SetActive(true);
+        }
+        else
+        {
+            PlayerStatsController.instance.UnequipItem(itemData);
+            equippedImage.SetActive(false);
+        }
     }
 }

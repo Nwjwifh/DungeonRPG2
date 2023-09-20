@@ -4,8 +4,13 @@ using UnityEngine;
 public class ItemSO : ScriptableObject
 {
     public string itemName;
+    public string itemDescription;
     public ItemType itemType;
-    public int itemValue;
+
+    public int itemDamage;
+    public int itemArmor;
+
+    public Sprite itemImage;
 
     public enum ItemType
     {
