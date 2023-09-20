@@ -15,7 +15,6 @@ public class PlayerStatsUI : MonoBehaviour
 
     public PlayerSO playerData;
 
-
     private void Start()
     {
         UpdatePlayerStatsUI();
@@ -23,7 +22,6 @@ public class PlayerStatsUI : MonoBehaviour
 
     void UpdatePlayerStatsUI()
     {
-        // TMP Text UI 요소에 플레이어 정보 표시
         playerNameText.text = playerData.playerName;
         playerLevelText.text = "LV. " + playerData.level.ToString();
         playerGoldText.text = playerData.gold.ToString();
