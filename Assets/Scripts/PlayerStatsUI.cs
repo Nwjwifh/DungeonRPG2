@@ -1,20 +1,12 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class PlayerStatsUI : MonoBehaviour
 {
-    public TMP_Text playerNameText;
-    public TMP_Text playerLevelText;
-    public TMP_Text playerGoldText;
-    public TMP_Text playerAttackText;
-    public TMP_Text playerDefenseText;
-    public TMP_Text playerMaxHPText;
-    public TMP_Text playerMaxMPText;
-    public TMP_Text playerMaxSPText;
-    public TMP_Text playerLuckText;
-
+    public List<TMP_Text> statTexts;
     public PlayerSO playerData;
-    
+
     private void Update()
     {
         UpdatePlayerStatsUI();
@@ -22,14 +14,19 @@ public class PlayerStatsUI : MonoBehaviour
 
     void UpdatePlayerStatsUI()
     {
-        playerNameText.text = playerData.playerName;
-        playerLevelText.text = "LV. " + playerData.level.ToString();
-        playerGoldText.text = playerData.gold.ToString();
-        playerAttackText.text = "ATK: " + playerData.atk.ToString();
-        playerDefenseText.text = "DEF: " + playerData.def.ToString();
-        playerMaxHPText.text = "HP: " + playerData.maxHP.ToString();
-        playerMaxMPText.text = "MP: " + playerData.maxMP.ToString();
-        playerMaxSPText.text = "SP: " + playerData.maxSP.ToString();
-        playerLuckText.text = "LUK: " + playerData.luk.ToString();
+        if (statTexts.Count == 0)
+        {
+            return;
+        }
+
+        statTexts[0].text = playerData.playerName;
+        statTexts[1].text = "LV. " + playerData.level.ToString();
+        statTexts[2].text = playerData.gold.ToString();
+        statTexts[3].text = "ATK: " + playerData.atk.ToString();
+        statTexts[4].text = "DEF: " + playerData.def.ToString();
+        statTexts[5].text = "HP: " + playerData.maxHP.ToString();
+        statTexts[6].text = "MP: " + playerData.maxMP.ToString();
+        statTexts[7].text = "SP: " + playerData.maxSP.ToString();
+        statTexts[8].text = "LUK: " + playerData.luk.ToString();
     }
 }
