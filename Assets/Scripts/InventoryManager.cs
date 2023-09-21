@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject menu;
     private bool isMenuActive;
 
+    [SerializeField] private GameObject menu;
     [SerializeField] private ItemSlot[] itemSlots;
 
     public static InventoryManager instance;
